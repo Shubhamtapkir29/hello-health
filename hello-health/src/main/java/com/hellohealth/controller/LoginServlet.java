@@ -6,6 +6,10 @@ import java.io.IOException;
 import dao.UserDAO;
 import model.User;
 
+import com.hellohealth.dao.UserDAO;
+import com.hellohealth.model.User;
+
+
 public class LoginServlet extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
 
