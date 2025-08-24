@@ -36,7 +36,7 @@ public class RegisterServlet extends HttpServlet {
         user.setPassword(password);
         user.setRole("USER"); // default role
 
-        boolean isRegistered = userDAO.addUser(user); // ✅ fixed
+        boolean isRegistered = userDAO.registerUser(user); // ✅ matches UserDAO
 
         if (isRegistered) {
             response.sendRedirect("login.jsp?success=1");
