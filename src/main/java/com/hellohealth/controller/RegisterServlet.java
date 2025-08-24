@@ -1,47 +1,30 @@
 package com.controller;
 
-import com.hellohealth.dao.UserDAO;
-import com.hellohealth.model.User;
-
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-
     private static final long serialVersionUID = 1L;
-    private UserDAO userDAO;
-
-    @Override
-    public void init() throws ServletException {
-        userDAO = new UserDAO();
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String role = request.getParameter("role");
 
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setRole("USER"); // default role
-
-        boolean isRegistered = userDAO.registerUser(user); // ✅ matches UserDAO
-
-        if (isRegistered) {
-            response.sendRedirect("login.jsp?success=1");
-        } else {
-            response.sendRedirect("register.jsp?error=1");
-        }
+        // For now just print (later we can save in DB)
+        response.setContentType("text/html");
+        response.getWriter().println("<h2>Registration Successful!</h2>");
+        response.getWriter().println("<p>Name: " + name + "</p>");
+        response.getWriter().println("<p>Email: " + email + "</p>");
+        response.getWriter().println("<p>Role: " + role + "</p>");
     }
 }
