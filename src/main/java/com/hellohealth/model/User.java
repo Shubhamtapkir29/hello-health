@@ -7,14 +7,13 @@ public class User {
     private String password;
     private String role;
 
-    // Constructor
+    // Constructor (correct order: name, email, password, role)
     public User(String name, String email, String password, String role) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.role = role;
-}
-
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     public User() {} // default constructor
 
