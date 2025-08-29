@@ -82,4 +82,7 @@
 
         <% if (request.getParameter("registered") != null) { %>
             <div class="success">Registration successful! Please log in.</div>
-        <%
+        <% } %>
+    </div>
+</body>
+</html>
