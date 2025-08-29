@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
 
         User newUser = new User(username, password, email, role);
 
-        boolean userAdded = userDAO.addUser(newUser);
+        boolean userAdded = userDAO.registerUser(newUser);
 
         if (userAdded) {
             // Send confirmation email
