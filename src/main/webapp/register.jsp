@@ -1,90 +1,94 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HelloHealth - Register</title>
-    <meta charset="UTF-8">
+    <title>Register - Hello Health</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f5f6fa;
+            background: #f4f6f9;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             height: 100vh;
         }
-        .register-container {
+        .container {
             background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 400px;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 350px;
         }
-        h2 {
-            text-align: center;
+        .container h2 {
             margin-bottom: 20px;
-            color: #2d3436;
+            text-align: center;
         }
-        label {
-            display: block;
-            margin-top: 10px;
-            color: #2d3436;
-        }
-        input, select {
+        input, select, button {
             width: 100%;
+            margin: 8px 0;
             padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #dcdde1;
+            font-size: 14px;
             border-radius: 5px;
+            border: 1px solid #ccc;
         }
         button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background: #0984e3;
-            border: none;
-            border-radius: 5px;
+            background: #007bff;
             color: #fff;
-            font-size: 16px;
+            font-weight: bold;
+            border: none;
             cursor: pointer;
         }
         button:hover {
-            background: #74b9ff;
+            background: #0056b3;
         }
-        .error {
-            color: red;
-            margin-top: 10px;
+        .message {
+            margin: 10px 0;
+            padding: 10px;
             text-align: center;
+            border-radius: 5px;
         }
+        .error { background: #f8d7da; color: #721c24; }
+        .success { background: #d4edda; color: #155724; }
     </style>
 </head>
 <body>
-    <div class="register-container">
-        <h2>Register</h2>
-        <form action="register" method="post">
-            <label for="username">Full Name</label>
-            <input type="text" id="username" name="username" required>
+<div class="container">
+    <h2>Create Account</h2>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+    <!-- Show messages -->
+    <%
+        String error = request.getParameter("error");
+        String registered = request.getParameter("registered");
+        if (error != null) {
+    %>
+        <div class="message error">Registration failed. Try again.</div>
+    <%
+        } else if (registered != null) {
+    %>
+        <div class="message success">Registration successful! Please log in.</div>
+    <%
+        }
+    %>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+    <!-- Registration form -->
+    <form action="<%=request.getContextPath()%>/register" method="post">
+        <input type="text" name="fullname" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        
+        <select name="role" required>
+            <option value="">-- Select Role --</option>
+            <option value="admin">Admin</option>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+        </select>
 
-            <label for="role">Role</label>
-            <select id="role" name="role" required>
-                <option value="">-- Select Role --</option>
-                <option value="patient">Patient</option>
-                <option value="doctor">Doctor</option>
-                <option value="admin">Admin</option>
-            </select>
+        <button type="submit">Register</button>
+    </form>
 
-            <button type="submit">Register</button>
-        </form>
-
-        <% if (request.getParameter("error") != null) { %>
-            <div class="error">Registration failed. Please try again.</div>
-        <% } %>
-    </div>
+    <p style="text-align:center; margin-top:15px;">
+        Already have an account? <a href="login.jsp">Login</a>
+    </p>
+</div>
 </body>
 </html>
