@@ -1,88 +1,85 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HelloHealth - Login</title>
-    <meta charset="UTF-8">
+    <title>Login - Hello Health</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f5f6fa;
+            background: #f4f6f9;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             height: 100vh;
         }
-        .login-container {
+        .container {
             background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 400px;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 350px;
         }
-        h2 {
-            text-align: center;
+        .container h2 {
             margin-bottom: 20px;
-            color: #2d3436;
+            text-align: center;
         }
-        label {
-            display: block;
-            margin-top: 10px;
-            color: #2d3436;
-        }
-        input {
+        input, button {
             width: 100%;
+            margin: 8px 0;
             padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #dcdde1;
+            font-size: 14px;
             border-radius: 5px;
+            border: 1px solid #ccc;
         }
         button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background: #0984e3;
-            border: none;
-            border-radius: 5px;
+            background: #28a745;
             color: #fff;
-            font-size: 16px;
+            font-weight: bold;
+            border: none;
             cursor: pointer;
         }
         button:hover {
-            background: #74b9ff;
+            background: #218838;
         }
-        .error, .success {
-            margin-top: 10px;
+        .message {
+            margin: 10px 0;
+            padding: 10px;
             text-align: center;
+            border-radius: 5px;
         }
-        .error {
-            color: red;
-        }
-        .success {
-            color: green;
-        }
+        .error { background: #f8d7da; color: #721c24; }
+        .success { background: #d4edda; color: #155724; }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="login" method="post">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+<div class="container">
+    <h2>Login</h2>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+    <!-- Show messages -->
+    <%
+        String error = request.getParameter("error");
+        String registered = request.getParameter("registered");
+        if (error != null) {
+    %>
+        <div class="message error">Invalid email or password. Please try again.</div>
+    <%
+        } else if (registered != null) {
+    %>
+        <div class="message success">Registration successful! Please log in.</div>
+    <%
+        }
+    %>
 
-            <button type="submit">Login</button>
-        </form>
+    <!-- Login form -->
+    <form action="<%=request.getContextPath()%>/login" method="post">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+    </form>
 
-        <% if (request.getParameter("error") != null) { %>
-            <div class="error">Invalid email or password.</div>
-        <% } %>
-
-        <% if (request.getParameter("registered") != null) { %>
-            <div class="success">Registration successful! Please log in.</div>
-        <% } %>
-    </div>
+    <p style="text-align:center; margin-top:15px;">
+        Don’t have an account? <a href="register.jsp">Register</a>
+    </p>
+</div>
 </body>
 </html>
