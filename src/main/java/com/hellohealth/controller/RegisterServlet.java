@@ -25,23 +25,24 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String name = request.getParameter("username"); // maps to "name" in User
         String email = request.getParameter("email");
+        String password = request.getParameter("password");
         String role = request.getParameter("role");
 
-        User newUser = new User(username, password, email, role);
+        // Correct constructor order: (name, email, password, role)
+        User newUser = new User(name, email, password, role);
 
         boolean userAdded = userDAO.registerUser(newUser);
 
         if (userAdded) {
             // Send confirmation email
             String subject = "Welcome to HelloHealth";
-            String message = "Dear " + username + ",\n\nThank you for registering on HelloHealth!";
+            String message = "Dear " + name + ",\n\nThank you for registering on HelloHealth!";
             EmailUtil.sendEmail(email, subject, message);
 
             HttpSession session = request.getSession();
-            session.setAttribute("username", username);
+            session.setAttribute("username", name);
 
             response.sendRedirect("login.jsp");
         } else {
