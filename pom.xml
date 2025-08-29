@@ -26,23 +26,14 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSP API -->
-        <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>4.0.1</version>
-          <scope>provided</scope>
-        </dependency>
-
-
-        <!-- JSTL (for JSP taglibs like <c:forEach>) -->
+        <!-- JSTL -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
 
-        <!-- Java Mail (for EmailUtil) -->
+        <!-- Java Mail -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
@@ -60,7 +51,6 @@
     <build>
         <finalName>hello-health</finalName>
         <plugins>
-            <!-- Compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -71,7 +61,6 @@
                 </configuration>
             </plugin>
 
-            <!-- WAR packaging plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
