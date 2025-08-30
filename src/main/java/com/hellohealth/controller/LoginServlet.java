@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class LoginServlet extends HttpServlet {
 
-    private static final String JDBC_URL = "jdbc:mysql://<your-rds-endpoint>:3306/hello_health";
+    private static final String JDBC_URL = "jdbc:hello-health.cn42u8e648n1.ap-south-1.rds.amazonaws.com:3306/hello_health";
     private static final String JDBC_USER = "admin";     // or your RDS master username
     private static final String JDBC_PASS = "admin123";  // your RDS password
      // update with your DB password
