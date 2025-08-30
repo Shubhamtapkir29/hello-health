@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
-    private static final String URL = "jdbc:mysql://hello-health.cn42u8e648n1.ap-south-1.rds.amazonaws.com:3306/hellohealth"; // change DB name if needed
-    private static final String USER = "admin";  // your DB username
-    private static final String PASSWORD = "admin123"; // your DB password
+    private static final String URL = "jdbc:mysql://hello-health.cn42u8e648n1.ap-south-1.rds.amazonaws.com:3306/hello_health?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private static final String USER = "admin";      // RDS username
+    private static final String PASSWORD = "admin123"; // RDS password
 
     static {
         try {
