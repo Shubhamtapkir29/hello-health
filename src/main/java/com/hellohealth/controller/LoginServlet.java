@@ -8,9 +8,10 @@ import java.sql.*;
 
 public class LoginServlet extends HttpServlet {
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/hello_health";
-    private static final String JDBC_USER = "root";      // update with your DB user
-    private static final String JDBC_PASS = "root";      // update with your DB password
+    private static final String JDBC_URL = "jdbc:mysql://<your-rds-endpoint>:3306/hello_health";
+    private static final String JDBC_USER = "admin";     // or your RDS master username
+    private static final String JDBC_PASS = "admin123";  // your RDS password
+     // update with your DB password
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
