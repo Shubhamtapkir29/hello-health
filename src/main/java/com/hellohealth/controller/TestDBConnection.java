@@ -19,7 +19,7 @@ public class TestDBConnection extends HttpServlet {
     // Update these details with your RDS endpoint, username, password
     private static final String jdbcURL = "jdbc:mysql://hello-health.cn42u8e648n1.ap-south-1.rds.amazonaws.com:3306/hello_health";
     private static final String dbUser = "admin";
-    private static final String dbPassword = "shubham123";
+    private static final String dbPassword = "admin123";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
