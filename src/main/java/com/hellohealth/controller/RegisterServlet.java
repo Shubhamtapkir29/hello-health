@@ -1,4 +1,4 @@
-package com.hellohealth.controller;
+package com.hellohealth.servlets;
 
 import com.hellohealth.dao.UserDAO;
 import com.hellohealth.model.User;
@@ -55,10 +55,7 @@ public class RegisterServlet extends HttpServlet {
                 response.getWriter().println("❌ Registration failed. No rows inserted.");
             }
         } catch (Exception e) {
-            // log exact error to Tomcat logs
-            e.printStackTrace();
-
-            // show friendly message in browser
+            e.printStackTrace(); // logs in Tomcat console/logs
             response.setContentType("text/plain");
             response.getWriter().println("❌ Registration failed: " + e.getMessage());
         }
