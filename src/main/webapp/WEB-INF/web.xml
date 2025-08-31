@@ -10,7 +10,7 @@
     <!-- Login -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.hellohealth.controller.LoginServlet</servlet-class>
+        <servlet-class>com.hellohealth.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -20,7 +20,7 @@
     <!-- Register -->
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.hellohealth.controller.RegisterServlet</servlet-class>
+        <servlet-class>com.hellohealth.servlets.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -30,7 +30,7 @@
     <!-- Patient Dashboard -->
     <servlet>
         <servlet-name>PatientDashboardServlet</servlet-name>
-        <servlet-class>com.hellohealth.controller.PatientDashboardServlet</servlet-class>
+        <servlet-class>com.hellohealth.servlets.PatientDashboardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PatientDashboardServlet</servlet-name>
@@ -40,7 +40,7 @@
     <!-- Doctor Dashboard -->
     <servlet>
         <servlet-name>DoctorDashboardServlet</servlet-name>
-        <servlet-class>com.hellohealth.controller.DoctorDashboardServlet</servlet-class>
+        <servlet-class>com.hellohealth.servlets.DoctorDashboardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DoctorDashboardServlet</servlet-name>
@@ -50,7 +50,7 @@
     <!-- Admin Dashboard -->
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>com.hellohealth.controller.AdminServlet</servlet-class>
+        <servlet-class>com.hellohealth.servlets.AdminServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
@@ -60,7 +60,7 @@
     <!-- Appointment Booking -->
     <servlet>
         <servlet-name>AppointmentServlet</servlet-name>
-        <servlet-class>com.hellohealth.controller.AppointmentServlet</servlet-class>
+        <servlet-class>com.hellohealth.servlets.AppointmentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AppointmentServlet</servlet-name>
@@ -70,7 +70,7 @@
     <!-- Prescriptions -->
     <servlet>
         <servlet-name>PrescriptionServlet</servlet-name>
-        <servlet-class>com.hellohealth.controller.PrescriptionServlet</servlet-class>
+        <servlet-class>com.hellohealth.servlets.PrescriptionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PrescriptionServlet</servlet-name>
@@ -86,6 +86,6 @@
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>    
         <welcome-file>index.jsp</welcome-file>
-        
     </welcome-file-list>
+
 </web-app>
