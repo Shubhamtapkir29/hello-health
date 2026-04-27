@@ -42,7 +42,7 @@
 <div class="login-box">
     <h2>Hello Health Login</h2>
 
-    <!-- ✅ Error Message -->
+    <!-- Error Message -->
     <%
         String error = request.getParameter("error");
         if ("invalid".equals(error)) {
@@ -56,7 +56,7 @@
         }
     %>
 
-    <!-- ✅ Login Form -->
+    <!-- Login Form -->
     <form action="login" method="post">
         <input type="email" name="email" placeholder="Enter Email" required /><br/>
         <input type="password" name="password" placeholder="Enter Password" required /><br/>
