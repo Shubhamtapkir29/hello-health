@@ -1,13 +1,18 @@
 package com.hellohealth.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int userId;
     private String name;
     private String email;
     private String password;
     private String role;
 
-    // Constructor
+    // ✅ Constructor
     public User(int userId, String name, String email, String password, String role) {
         this.userId = userId;
         this.name = name;
@@ -16,9 +21,10 @@ public class User {
         this.role = role;
     }
 
-    public User() {} // default constructor
+    public User() {}
 
-    // Getters and setters
+    // ✅ Getters and Setters
+
     public int getUserId() {
         return userId;
     }
@@ -43,6 +49,7 @@ public class User {
         this.email = email;
     }
 
+    // ⚠️ Avoid exposing password in logs/UI
     public String getPassword() {
         return password;
     }
@@ -57,5 +64,16 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    // ✅ Safe toString (no password)
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }
