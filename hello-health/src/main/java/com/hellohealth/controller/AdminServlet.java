@@ -1,60 +1,75 @@
 package com.hellohealth.controller;
 
 import com.hellohealth.dao.DBUtil;
-import jakarta.servlet.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@WebServlet("/admin")   // ✅ important for Tomcat 10 (no web.xml needed)
 public class AdminServlet extends HttpServlet {
 
+    private static final Logger logger = LoggerFactory.getLogger(AdminServlet.class);
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+
         List<Map<String, String>> users = new ArrayList<>();
         List<Map<String, String>> doctors = new ArrayList<>();
         List<Map<String, String>> patients = new ArrayList<>();
 
-        try (Connection c = DBUtil.getConnection()) {
-            // Users
-            Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery("SELECT user_id, name, email, role FROM users");
-            while (rs.next()) {
-                Map<String, String> u = new HashMap<>();
-                u.put("id", rs.getString("user_id"));
-                u.put("name", rs.getString("name"));
-                u.put("email", rs.getString("email"));
-                u.put("role", rs.getString("role"));
-                users.add(u);
+        try (Connection c = DBUtil.getConnection();
+             Statement st = c.createStatement()) {
+
+            // ✅ Users
+            try (ResultSet rs = st.executeQuery("SELECT user_id, name, email, role FROM users")) {
+                while (rs.next()) {
+                    Map<String, String> u = new HashMap<>();
+                    u.put("id", rs.getString("user_id"));
+                    u.put("name", rs.getString("name"));
+                    u.put("email", rs.getString("email"));
+                    u.put("role", rs.getString("role"));
+                    users.add(u);
+                }
             }
 
-            // Doctors
-            rs = st.executeQuery(
-                "SELECT d.doctor_id, u.name, d.specialization FROM doctors d JOIN users u ON d.user_id=u.user_id");
-            while (rs.next()) {
-                Map<String, String> d = new HashMap<>();
-                d.put("id", rs.getString("doctor_id"));
-                d.put("name", rs.getString("name"));
-                d.put("specialization", rs.getString("specialization"));
-                doctors.add(d);
+            // ✅ Doctors
+            try (ResultSet rs = st.executeQuery(
+                    "SELECT d.doctor_id, u.name, d.specialization FROM doctors d JOIN users u ON d.user_id=u.user_id")) {
+                while (rs.next()) {
+                    Map<String, String> d = new HashMap<>();
+                    d.put("id", rs.getString("doctor_id"));
+                    d.put("name", rs.getString("name"));
+                    d.put("specialization", rs.getString("specialization"));
+                    doctors.add(d);
+                }
             }
 
-            // Patients
-            rs = st.executeQuery(
-                "SELECT p.patient_id, u.name, p.age, p.gender FROM patients p JOIN users u ON p.user_id=u.user_id");
-            while (rs.next()) {
-                Map<String, String> p = new HashMap<>();
-                p.put("id", rs.getString("patient_id"));
-                p.put("name", rs.getString("name"));
-                p.put("age", rs.getString("age"));
-                p.put("gender", rs.getString("gender"));
-                patients.add(p);
+            // ✅ Patients
+            try (ResultSet rs = st.executeQuery(
+                    "SELECT p.patient_id, u.name, p.age, p.gender FROM patients p JOIN users u ON p.user_id=u.user_id")) {
+                while (rs.next()) {
+                    Map<String, String> p = new HashMap<>();
+                    p.put("id", rs.getString("patient_id"));
+                    p.put("name", rs.getString("name"));
+                    p.put("age", rs.getString("age"));
+                    p.put("gender", rs.getString("gender"));
+                    patients.add(p);
+                }
             }
+
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error fetching admin dashboard data", e);
+            req.setAttribute("error", "Unable to load dashboard data");
         }
 
-        // Send lists to JSP
+        // ✅ Send data to JSP
         req.setAttribute("users", users);
         req.setAttribute("doctors", doctors);
         req.setAttribute("patients", patients);
